@@ -63,7 +63,10 @@ def get_shop_list_by_dishes(dishes, person_count) -> dict:
                     grocery_list[list_item.get(
                         'ingredient_name')] = quantity_ingredients
                 else:
-                    grocery_list.get('ingredient_name')
+                    quantity_ingredients_new = {}
+                    quantity_ingredients_new = grocery_list[list_item.get('ingredient_name')]
+                    quantity_ingredients_new['quantity'] = quantity_ingredients_new['quantity'] + list_item.get('quantity') * person_count
+                    grocery_list[list_item.get('ingredient_name')] = quantity_ingredients_new
         else:
             print(f'Блюда "{item_dish}" нет в списке.')
     pprint(grocery_list)
