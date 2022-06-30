@@ -43,9 +43,6 @@ def recipe_list_processing(file_name: str) -> dict:
     return cook_book
 
 
-# pprint(recipe_list_processing(file_name))
-
-
 def get_shop_list_by_dishes(dishes, person_count) -> dict:
 
     cook_book = recipe_list_processing(file_name)
@@ -58,18 +55,21 @@ def get_shop_list_by_dishes(dishes, person_count) -> dict:
                 if not list_item.get('ingredient_name') in grocery_list:
                     quantity_ingredients = {}
                     quantity_ingredients['measure'] = list_item.get('measure')
-                    quantity_ingredients['quantity'] = list_item.get(
-                        'quantity')
+                    quantity_ingredients['quantity'] = int(list_item.get(
+                        'quantity')) * person_count
                     grocery_list[list_item.get(
                         'ingredient_name')] = quantity_ingredients
                 else:
                     quantity_ingredients_new = {}
-                    quantity_ingredients_new = grocery_list[list_item.get('ingredient_name')]
-                    quantity_ingredients_new['quantity'] = quantity_ingredients_new['quantity'] + list_item.get('quantity') * person_count
-                    grocery_list[list_item.get('ingredient_name')] = quantity_ingredients_new
+                    quantity_ingredients_new = grocery_list[list_item.get(
+                        'ingredient_name')]
+                    quantity_ingredients_new['quantity'] = quantity_ingredients_new['quantity'] + int(list_item.get(
+                        'quantity')) * person_count
+                    grocery_list[list_item.get(
+                        'ingredient_name')] = quantity_ingredients_new
         else:
             print(f'Блюда "{item_dish}" нет в списке.')
     pprint(grocery_list)
 
 
-get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'], 2)
+get_shop_list_by_dishes(['Запеченный картофель', 'Омлет', 'Фахитос'], 2)
