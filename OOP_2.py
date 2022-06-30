@@ -48,7 +48,6 @@ def get_shop_list_by_dishes(dishes, person_count) -> dict:
     cook_book = recipe_list_processing(file_name)
     grocery_list = {}
 
-    # pprint(cook_book)
     for item_dish in dishes:
         if item_dish in cook_book:
             for list_item in cook_book.get(item_dish):
